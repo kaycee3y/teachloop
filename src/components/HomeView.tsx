@@ -15,6 +15,8 @@ function timeOfDay() {
   return "evening";
 }
 
+const displayFont = { fontFamily: "var(--font-baloo)" };
+
 export default function HomeView({
   streak,
   points,
@@ -31,7 +33,7 @@ export default function HomeView({
           <span className="flex items-center gap-1">🔥 {streak}</span>
           <span className="flex items-center gap-1">⭐ {points}</span>
         </div>
-        <h1 className="mt-6 text-2xl font-semibold text-gray-900">Good {timeOfDay()}</h1>
+        <h1 style={displayFont} className="mt-6 text-2xl font-semibold text-gray-900">Good {timeOfDay()}</h1>
         <p className="mt-1 text-sm text-gray-600">What do you want to master today?</p>
       </div>
 

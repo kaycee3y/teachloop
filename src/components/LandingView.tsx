@@ -4,6 +4,8 @@ interface LandingViewProps {
   onGetStarted: () => void;
 }
 
+const displayFont = { fontFamily: "var(--font-baloo)" };
+
 const STEPS = [
   {
     icon: NotebookPen,
@@ -26,7 +28,7 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
   return (
     <main className="min-h-screen bg-surface">
       <header className="flex items-center justify-between px-6 py-5">
-        <span className="text-lg font-semibold text-gray-900">Teachloop</span>
+        <span style={displayFont} className="text-lg font-semibold text-gray-900">Teachloop</span>
         <button
           onClick={onGetStarted}
           className="rounded-pill bg-primary px-5 py-2 text-sm font-medium text-white"
@@ -36,7 +38,7 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
       </header>
 
       <section className="rounded-b-[64px] bg-gradient-to-b from-gradient-start to-gradient-end px-6 pb-20 pt-10 text-center">
-        <h1 className="mx-auto max-w-xs text-4xl font-semibold leading-tight text-gray-900">
+        <h1 style={displayFont} className="mx-auto max-w-xs text-4xl font-semibold leading-tight text-gray-900">
           Learn it until you can teach it
         </h1>
         <p className="mx-auto mt-4 max-w-xs text-sm text-gray-700">
@@ -52,7 +54,7 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
       </section>
 
       <section className="mx-auto max-w-4xl px-6 py-14">
-        <h2 className="text-center text-xl font-semibold text-gray-900">How it works</h2>
+        <h2 style={displayFont} className="text-center text-xl font-semibold text-gray-900">How it works</h2>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {STEPS.map((s, i) => (
             <div
@@ -71,7 +73,7 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
       </section>
 
       <section className="rounded-[48px] bg-gradient-to-b from-gradient-end to-gradient-start px-6 py-14 text-center">
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2 style={displayFont} className="text-xl font-semibold text-gray-900">
           Quizzes tell you what you remember.
           <br />
           Explaining tells you what you understand.
@@ -84,7 +86,7 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
       </section>
 
       <section className="px-6 py-16 text-center">
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2 style={displayFont} className="text-xl font-semibold text-gray-900">
           Built for the Prometheus August AI Challenge
         </h2>
         <p className="mt-2 text-sm text-gray-600">Pick anything you&apos;re studying and try it now.</p>

@@ -7,6 +7,8 @@ interface SkillPathViewProps {
   onBack: () => void;
 }
 
+const displayFont = { fontFamily: "var(--font-baloo)" };
+
 export default function SkillPathView({
   path,
   activeIndex,
@@ -18,7 +20,7 @@ export default function SkillPathView({
       <button onClick={onBack} className="text-sm text-gray-500">
         &larr; New topic
       </button>
-      <h1 className="mt-3 text-xl font-semibold text-gray-900">{path.pathTitle}</h1>
+      <h1 style={displayFont} className="mt-3 text-xl font-semibold text-gray-900">{path.pathTitle}</h1>
 
       <div className="mt-6 space-y-4">
         {path.nodes.map((node, index) => {
