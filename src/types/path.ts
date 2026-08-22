@@ -16,3 +16,10 @@ export interface LearningPath {
   pathTitle: string;
   nodes: PathNode[];
 }
+
+export interface GradeResult {
+  score: number;
+  hits: string[];
+  gaps: string[];
+  feedback: string;
+}
