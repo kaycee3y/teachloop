@@ -11,16 +11,22 @@ const STEPS = [
     icon: NotebookPen,
     title: "Paste a topic",
     description: "Drop in your notes or just type what you're trying to learn.",
+    badgeClass: "bg-accent-coral",
+    cardClass: "bg-accent-coral-light",
   },
   {
     icon: Brain,
     title: "Quiz and explain",
     description: "Answer quick questions, then explain the idea back in your own words.",
+    badgeClass: "bg-accent-gold",
+    cardClass: "bg-accent-gold-light",
   },
   {
     icon: Target,
     title: "See your gaps",
     description: "Get graded on what you actually understand, not just what you memorized.",
+    badgeClass: "bg-success",
+    cardClass: "bg-success-light",
   },
 ];
 
@@ -59,11 +65,11 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
           {STEPS.map((s, i) => (
             <div
               key={s.title}
-              className="group animate-fade-up rounded-card bg-surface-muted p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
+              className={`group animate-fade-up rounded-card ${s.cardClass} p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md`}
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-white transition-transform duration-300 ease-out group-hover:scale-110">
-                <s.icon className="h-5 w-5" />
+              <span className={`flex h-12 w-12 items-center justify-center rounded-2xl ${s.badgeClass} text-white transition-transform duration-300 ease-out group-hover:scale-110`}>
+                <s.icon className="h-6 w-6" strokeWidth={2.25} />
               </span>
               <h3 className="mt-4 font-semibold text-gray-900">{s.title}</h3>
               <p className="mt-1 text-sm text-gray-600">{s.description}</p>
