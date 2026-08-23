@@ -1,6 +1,7 @@
 import { Flame, Star } from "lucide-react";
 
 interface HomeViewProps {
+  name?: string;
   streak: number;
   points: number;
   topic: string;
@@ -20,6 +21,7 @@ function timeOfDay() {
 const displayFont = { fontFamily: "var(--font-baloo)" };
 
 export default function HomeView({
+  name,
   streak,
   points,
   topic,
@@ -41,7 +43,9 @@ export default function HomeView({
             <span className="text-sm font-semibold text-gray-800">{points}</span>
           </span>
         </div>
-        <h1 style={displayFont} className="mt-6 text-2xl font-semibold text-gray-900">Good {timeOfDay()}</h1>
+        <h1 style={displayFont} className="mt-6 text-2xl font-semibold text-gray-900">
+          Good {timeOfDay()}{name ? `, ${name}` : ""}
+        </h1>
         <p className="mt-1 text-sm text-gray-600">What do you want to master today?</p>
       </div>
 
