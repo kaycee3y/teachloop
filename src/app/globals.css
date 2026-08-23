@@ -63,3 +63,17 @@ body {
   --color-surface-muted: #FFF6EE;
   --font-display: var(--font-baloo);
 }
+@theme {
+  --color-surface: #F4F3EE;
+  --color-surface-muted: #FFFFFF;
+  --color-primary: #313131;
+  --color-primary-light: #E8E7E2;
+  --color-success: #1B8A6B;
+  --color-success-light: #DCEFE9;
+  --color-accent-coral: #F0617A;
+  --color-accent-coral-light: #FDE4E8;
+  --color-accent-gold: #F5A623;
+  --color-accent-gold-light: #FDF0D9;
+  --color-gradient-start: #F4F3EE;
+  --color-gradient-end: #EDEAE0;
+}
