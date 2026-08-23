@@ -62,9 +62,9 @@ export default function ExplainView({ node, onComplete, onExit }: ExplainViewPro
         )}
 
         {result.gaps.length > 0 && (
-          <div className="mt-4 rounded-card bg-primary-light p-5">
+          <div className="mt-4 rounded-card bg-accent-gold-light p-5">
             <h2 className="flex items-center gap-2 font-semibold text-gray-900">
-              <Sparkles className="h-5 w-5 text-primary" /> Worth another look
+              <Sparkles className="h-5 w-5 text-accent-gold" /> Worth another look
             </h2>
             <ul className="mt-3 space-y-2 text-sm text-gray-700">
               {result.gaps.map((gap) => (
