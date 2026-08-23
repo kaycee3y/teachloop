@@ -1,3 +1,5 @@
+import { Flame, Star } from "lucide-react";
+
 interface HomeViewProps {
   streak: number;
   points: number;
@@ -29,9 +31,15 @@ export default function HomeView({
   return (
     <main className="min-h-screen bg-surface-muted px-5 pb-10 pt-8">
       <div className="rounded-card bg-gradient-to-b from-gradient-start to-gradient-end px-6 py-8 text-center shadow-sm">
-        <div className="flex items-center justify-between text-sm font-medium text-gray-700">
-          <span className="flex items-center gap-1">🔥 {streak}</span>
-          <span className="flex items-center gap-1">⭐ {points}</span>
+        <div className="flex items-center justify-between">
+          <span className="flex items-center gap-1.5 rounded-pill bg-white/60 px-3 py-1.5">
+            <Flame className="h-4 w-4 fill-accent-coral text-accent-coral" />
+            <span className="text-sm font-semibold text-gray-800">{streak}</span>
+          </span>
+          <span className="flex items-center gap-1.5 rounded-pill bg-white/60 px-3 py-1.5">
+            <Star className="h-4 w-4 fill-accent-gold text-accent-gold" />
+            <span className="text-sm font-semibold text-gray-800">{points}</span>
+          </span>
         </div>
         <h1 style={displayFont} className="mt-6 text-2xl font-semibold text-gray-900">Good {timeOfDay()}</h1>
         <p className="mt-1 text-sm text-gray-600">What do you want to master today?</p>
