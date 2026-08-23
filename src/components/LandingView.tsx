@@ -93,7 +93,7 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
 
       <section className="px-6 py-16 text-center">
         <h2 style={displayFont} className="text-xl font-semibold text-gray-900">
-          Built for the Prometheus August AI Challenge
+          Ready to actually understand it?
         </h2>
         <p className="mt-2 text-sm text-gray-600">Pick anything you&apos;re studying and try it now.</p>
         <button
