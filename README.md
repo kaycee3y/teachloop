@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Teachloop
 
-## Getting Started
+**Learn it until you can teach it.**
 
-First, run the development server:
+Paste any topic or your own notes. Teachloop turns it into a bite sized learning path, quizzes you, and then grades how well you can explain it back in your own words.
+
+## The problem
+
+Most study apps stop at quizzes. Quizzes measure recall, they don't measure understanding, and it's easy to pass a multiple choice question on a concept you couldn't actually explain to another person. Teachloop is built around the Feynman technique: if you can't explain something simply, you don't know it yet.
+
+## What it does
+
+- **Paste a topic or your own notes.** Teachloop uses AI to break it into a short skill path, three to five bite sized nodes, ordered from foundational to advanced.
+- **Quiz yourself.** Each node has quick multiple choice questions, hearts and points, familiar gamified mechanics.
+- **Explain it back.** After the quiz, you write the concept in your own words, no multiple choice to lean on.
+- **Get graded on substance.** An AI grader compares your explanation against the concept, and shows exactly what you nailed and what's still a gap, not just a score.
+- **See your mastery, not just your streak.** Finishing a path shows an average mastery score across every node's grading, alongside points earned.
+- **A quick personalized onboarding** collects your name, age range, education level, and study vibe, and greets you by name from then on.
+
+## How it works
+
+1. Paste a topic
+2. Quiz and explain
+3. See your gaps
+
+## Tech stack
+
+- **Next.js** (App Router, TypeScript, Tailwind CSS v4)
+- **Groq API** (`openai/gpt-oss-120b`) for path generation and explanation grading
+- **lucide-react** for iconography
+- Deployed on **Vercel**
+
+
+
+## Built for
+
+Prometheus August AI Challenge, an educational AI/ML tool built to make learning more accessible, engaging, and personalized.
+
+## Getting started locally
+
+```bash
+git clone https://github.com/kaycee3y/teachloop.git
+cd teachloop
+npm install
+```
+
+Create a `.env.local` file with your Groq API key:
+
+```
+
+Then run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## License
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built for a hackathon submission. Not currently licensed for reuse.
