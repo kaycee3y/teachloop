@@ -26,17 +26,17 @@ export default function PathCompleteView({
       <p className="mt-1 text-sm text-gray-700">{pathTitle}</p>
 
       <div className="mt-6 flex gap-4">
-        <div className="rounded-card bg-surface px-6 py-4 shadow-sm">
+        <div className="rounded-card bg-accent-gold-light px-6 py-4 shadow-sm">
           <p style={displayFont} className="text-2xl font-bold text-gray-900">
             {averageScore}
           </p>
-          <p className="mt-1 text-xs text-gray-500">Avg mastery</p>
+          <p className="mt-1 text-xs text-gray-600">Avg mastery</p>
         </div>
-        <div className="rounded-card bg-surface px-6 py-4 shadow-sm">
+        <div className="rounded-card bg-accent-coral-light px-6 py-4 shadow-sm">
           <p style={displayFont} className="text-2xl font-bold text-gray-900">
             +{pointsEarned}
           </p>
-          <p className="mt-1 text-xs text-gray-500">Points earned</p>
+          <p className="mt-1 text-xs text-gray-600">Points earned</p>
         </div>
       </div>
 
