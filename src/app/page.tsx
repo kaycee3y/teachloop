@@ -3,12 +3,20 @@
 import { useState, useEffect } from "react";
 import LandingView from "@/components/LandingView";
 import ConsentGate from "@/components/ConsentGate";
+import OnboardingView from "@/components/OnboardingView";
 import HomeView from "@/components/HomeView";
 import SkillPathView from "@/components/SkillPathView";
 import QuizView from "@/components/QuizView";
 import ExplainView from "@/components/ExplainView";
 import PathCompleteView from "@/components/PathCompleteView";
 import { LearningPath, GradeResult } from "@/types/path";
+
+interface Profile {
+  name: string;
+  ageRange: string;
+  education: string;
+  vibe: string;
+}
 
 export default function Page() {
   const [started, setStarted] = useState(false);
@@ -24,17 +32,27 @@ export default function Page() {
   const [pathPoints, setPathPoints] = useState(0);
   const [hearts, setHearts] = useState(5);
   const [nodeScores, setNodeScores] = useState<Record<number, number>>({});
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [profileLoaded, setProfileLoaded] = useState(false);
 
   useEffect(() => {
     const savedPoints = localStorage.getItem("teachloop_points");
     const savedStreak = localStorage.getItem("teachloop_streak");
+    const savedProfile = localStorage.getItem("teachloop_profile");
     if (savedPoints) setPoints(Number(savedPoints));
     if (savedStreak) setStreak(Number(savedStreak));
+    if (savedProfile) setProfile(JSON.parse(savedProfile));
+    setProfileLoaded(true);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("teachloop_points", String(points));
   }, [points]);
+
+  function handleOnboardingComplete(p: Profile) {
+    setProfile(p);
+    localStorage.setItem("teachloop_profile", JSON.stringify(p));
+  }
 
   function recordActivity() {
     const today = new Date().toISOString().split("T")[0];
@@ -136,7 +154,9 @@ export default function Page() {
 
   return (
     <ConsentGate>
-      {path && workingIndex !== null && stage === "quiz" ? (
+      {!profileLoaded ? null : !profile ? (
+        <OnboardingView onComplete={handleOnboardingComplete} />
+      ) : path && workingIndex !== null && stage === "quiz" ? (
         <QuizView
           node={path.nodes[workingIndex]}
           hearts={hearts}
@@ -169,6 +189,7 @@ export default function Page() {
         />
       ) : (
         <HomeView
+          name={profile.name}
           streak={streak}
           points={points}
           topic={topic}
