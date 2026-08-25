@@ -23,3 +23,10 @@ export interface GradeResult {
   gaps: string[];
   feedback: string;
 }
+export interface HistoryEntry {
+  id: string;
+  pathTitle: string;
+  averageScore: number;
+  pointsEarned: number;
+  completedAt: number;
+}
