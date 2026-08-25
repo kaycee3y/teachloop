@@ -39,15 +39,33 @@ export default function Page() {
     const savedPoints = localStorage.getItem("teachloop_points");
     const savedStreak = localStorage.getItem("teachloop_streak");
     const savedProfile = localStorage.getItem("teachloop_profile");
+    const savedActivePath = localStorage.getItem("teachloop_active_path");
     if (savedPoints) setPoints(Number(savedPoints));
     if (savedStreak) setStreak(Number(savedStreak));
     if (savedProfile) setProfile(JSON.parse(savedProfile));
+    if (savedActivePath) {
+      const restored = JSON.parse(savedActivePath);
+      setPath(restored.path);
+      setActiveIndex(restored.activeIndex);
+      setNodeScores(restored.nodeScores);
+      setPathPoints(restored.pathPoints);
+      setHearts(restored.hearts);
+      setTopic(restored.topic);
+    }
     setProfileLoaded(true);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("teachloop_points", String(points));
   }, [points]);
+
+  useEffect(() => {
+    if (!path) return;
+    localStorage.setItem(
+      "teachloop_active_path",
+      JSON.stringify({ path, activeIndex, nodeScores, pathPoints, hearts, topic })
+    );
+  }, [path, activeIndex, nodeScores, pathPoints, hearts, topic]);
 
   function handleOnboardingComplete(p: Profile) {
     setProfile(p);
@@ -134,6 +152,9 @@ export default function Page() {
   function exitWork() {
     setWorkingIndex(null);
     setStage("quiz");
+    if (hearts <= 0) {
+      setHearts(5);
+    }
   }
 
   function startNewTopic() {
@@ -142,6 +163,7 @@ export default function Page() {
     setActiveIndex(0);
     setNodeScores({});
     setPathPoints(0);
+    localStorage.removeItem("teachloop_active_path");
   }
 
   if (!started) {
