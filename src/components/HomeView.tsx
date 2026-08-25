@@ -1,4 +1,4 @@
-import { Flame, Star } from "lucide-react";
+import { Flame, Star, History } from "lucide-react";
 
 interface HomeViewProps {
   name?: string;
@@ -9,6 +9,7 @@ interface HomeViewProps {
   onSubmit: () => void;
   loading: boolean;
   error: string | null;
+  onShowHistory?: () => void;
 }
 
 function timeOfDay() {
@@ -29,19 +30,30 @@ export default function HomeView({
   onSubmit,
   loading,
   error,
+  onShowHistory,
 }: HomeViewProps) {
   return (
     <main className="min-h-screen bg-surface-muted px-5 pb-10 pt-8">
       <div className="rounded-card bg-gradient-to-b from-gradient-start to-gradient-end px-6 py-8 text-center shadow-sm">
         <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5 rounded-pill bg-white/60 px-3 py-1.5">
-            <Flame className="h-4 w-4 fill-accent-coral text-accent-coral" />
-            <span className="text-sm font-semibold text-gray-800">{streak}</span>
-          </span>
-          <span className="flex items-center gap-1.5 rounded-pill bg-white/60 px-3 py-1.5">
-            <Star className="h-4 w-4 fill-accent-gold text-accent-gold" />
-            <span className="text-sm font-semibold text-gray-800">{points}</span>
-          </span>
+          <div className="flex gap-2">
+            <span className="flex items-center gap-1.5 rounded-pill bg-white/60 px-3 py-1.5">
+              <Flame className="h-4 w-4 fill-accent-coral text-accent-coral" />
+              <span className="text-sm font-semibold text-gray-800">{streak}</span>
+            </span>
+            <span className="flex items-center gap-1.5 rounded-pill bg-white/60 px-3 py-1.5">
+              <Star className="h-4 w-4 fill-accent-gold text-accent-gold" />
+              <span className="text-sm font-semibold text-gray-800">{points}</span>
+            </span>
+          </div>
+          {onShowHistory && (
+            <button
+              onClick={onShowHistory}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-white/60"
+            >
+              <History className="h-4 w-4 text-gray-700" />
+            </button>
+          )}
         </div>
         <h1 style={displayFont} className="mt-6 text-2xl font-semibold text-gray-900">
           Good {timeOfDay()}{name ? `, ${name}` : ""}
