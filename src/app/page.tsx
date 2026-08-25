@@ -9,7 +9,8 @@ import SkillPathView from "@/components/SkillPathView";
 import QuizView from "@/components/QuizView";
 import ExplainView from "@/components/ExplainView";
 import PathCompleteView from "@/components/PathCompleteView";
-import { LearningPath, GradeResult } from "@/types/path";
+import HistoryView from "@/components/HistoryView";
+import { LearningPath, GradeResult, HistoryEntry } from "@/types/path";
 
 interface Profile {
   name: string;
@@ -34,6 +35,7 @@ export default function Page() {
   const [nodeScores, setNodeScores] = useState<Record<number, number>>({});
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileLoaded, setProfileLoaded] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
     const savedPoints = localStorage.getItem("teachloop_points");
@@ -93,6 +95,21 @@ export default function Page() {
     localStorage.setItem("teachloop_streak", String(newStreak));
   }
 
+  function saveToHistory(pathTitle: string, averageScore: number, pointsEarned: number) {
+    const raw = localStorage.getItem("teachloop_history");
+    const existing: HistoryEntry[] = raw ? JSON.parse(raw) : [];
+    const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+    const pruned = existing.filter((entry) => entry.completedAt >= thirtyDaysAgo);
+    const newEntry: HistoryEntry = {
+      id: crypto.randomUUID(),
+      pathTitle,
+      averageScore,
+      pointsEarned,
+      completedAt: Date.now(),
+    };
+    localStorage.setItem("teachloop_history", JSON.stringify([newEntry, ...pruned]));
+  }
+
   async function handleSubmit() {
     setLoading(true);
     setError(null);
@@ -135,13 +152,20 @@ export default function Page() {
     setPathPoints((p) => p + bonus);
 
     if (workingIndex !== null) {
-      setNodeScores((scores) => ({ ...scores, [workingIndex]: result.score }));
+      const updatedScores = { ...nodeScores, [workingIndex]: result.score };
+      setNodeScores(updatedScores);
 
       if (workingIndex === activeIndex) {
         const nextIndex = workingIndex + 1;
         setActiveIndex(nextIndex);
         if (path && nextIndex >= path.nodes.length) {
           recordActivity();
+          const scoreValues = Object.values(updatedScores);
+          const avg =
+            scoreValues.length > 0
+              ? Math.round(scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length)
+              : 0;
+          saveToHistory(path.pathTitle, avg, pathPoints + bonus);
         }
       }
     }
@@ -163,6 +187,7 @@ export default function Page() {
     setActiveIndex(0);
     setNodeScores({});
     setPathPoints(0);
+    setShowHistory(false);
     localStorage.removeItem("teachloop_active_path");
   }
 
@@ -178,6 +203,8 @@ export default function Page() {
     <ConsentGate>
       {!profileLoaded ? null : !profile ? (
         <OnboardingView onComplete={handleOnboardingComplete} />
+      ) : showHistory ? (
+        <HistoryView onBack={() => setShowHistory(false)} onNewLesson={startNewTopic} />
       ) : path && workingIndex !== null && stage === "quiz" ? (
         <QuizView
           node={path.nodes[workingIndex]}
@@ -219,6 +246,7 @@ export default function Page() {
           onSubmit={handleSubmit}
           loading={loading}
           error={error}
+          onShowHistory={() => setShowHistory(true)}
         />
       )}
     </ConsentGate>
