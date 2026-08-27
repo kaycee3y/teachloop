@@ -1,4 +1,4 @@
-import { NotebookPen, Brain, Target } from "lucide-react";
+import { Pin } from "lucide-react";
 
 interface LandingViewProps {
   onGetStarted: () => void;
@@ -8,25 +8,31 @@ const displayFont = { fontFamily: "var(--font-baloo)" };
 
 const STEPS = [
   {
-    icon: NotebookPen,
+    number: "01",
     title: "Paste a topic",
     description: "Drop in your notes or just type what you're trying to learn.",
-    badgeClass: "bg-accent-coral",
     cardClass: "bg-accent-coral-light",
+    pinClass: "bg-accent-coral",
+    numberClass: "text-accent-coral",
+    align: "ml-0",
   },
   {
-    icon: Brain,
+    number: "02",
     title: "Quiz and explain",
     description: "Answer quick questions, then explain the idea back in your own words.",
-    badgeClass: "bg-accent-gold",
     cardClass: "bg-accent-gold-light",
+    pinClass: "bg-accent-gold",
+    numberClass: "text-accent-gold",
+    align: "ml-auto",
   },
   {
-    icon: Target,
+    number: "03",
     title: "See your gaps",
     description: "Get graded on what you actually understand, not just what you memorized.",
-    badgeClass: "bg-success",
     cardClass: "bg-success-light",
+    pinClass: "bg-success",
+    numberClass: "text-success",
+    align: "ml-0",
   },
 ];
 
@@ -61,18 +67,27 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
 
       <section className="mx-auto max-w-4xl px-6 py-14">
         <h2 style={displayFont} className="text-center text-xl font-semibold text-gray-900">How it works</h2>
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="mt-10 flex flex-col">
           {STEPS.map((s, i) => (
-            <div
-              key={s.title}
-              className={`group animate-fade-up rounded-card ${s.cardClass} p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md`}
-              style={{ animationDelay: `${i * 100}ms` }}
-            >
-              <span className={`flex h-12 w-12 items-center justify-center rounded-2xl ${s.badgeClass} text-white transition-transform duration-300 ease-out group-hover:scale-110`}>
-                <s.icon className="h-6 w-6" strokeWidth={2.25} />
-              </span>
-              <h3 className="mt-4 font-semibold text-gray-900">{s.title}</h3>
-              <p className="mt-1 text-sm text-gray-600">{s.description}</p>
+            <div key={s.number}>
+              <div
+                className={`relative w-[82%] ${s.align} animate-fade-up`}
+                style={{ animationDelay: `${i * 120}ms` }}
+              >
+                <span
+                  className={`absolute -top-4 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full ${s.pinClass} text-white shadow-md`}
+                >
+                  <Pin className="h-4 w-4" />
+                </span>
+                <div className={`rounded-card ${s.cardClass} p-6 pt-8 shadow-sm`}>
+                  <p className={`text-sm font-bold ${s.numberClass}`}>{s.number}</p>
+                  <h3 className="mt-2 font-semibold text-gray-900">{s.title}</h3>
+                  <p className="mt-1 text-sm text-gray-600">{s.description}</p>
+                </div>
+              </div>
+              {i < STEPS.length - 1 && (
+                <div className="mx-auto my-3 h-6 w-px border-l-2 border-dashed border-gray-300" />
+              )}
             </div>
           ))}
         </div>
@@ -95,7 +110,7 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
         <h2 style={displayFont} className="text-xl font-semibold text-gray-900">
           Ready to actually understand it?
         </h2>
-        <p className="mt-2 text-sm text-gray-600">Pick anything you&apos;re studying and try it now.</p>
+        <p className="mt-2 text-sm text-gray-600">Pick anything you&apos;re studying and put it to the test.</p>
         <button
           onClick={onGetStarted}
           className="mt-6 rounded-pill bg-primary px-8 py-3 font-medium text-white shadow-sm"
