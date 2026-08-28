@@ -88,13 +88,13 @@ export default function QuizView({ node, hearts, onAnswer, onComplete, onExit }:
           const isCorrect = index === question.correctIndex;
           const isSelected = index === selected;
 
-          let stateClasses = "border-gray-200 bg-surface";
+          let stateClasses = "bg-primary text-white";
           if (revealed && isCorrect) {
-            stateClasses = "border-success bg-success-light";
+            stateClasses = "bg-success text-white";
           } else if (revealed && isSelected && !isCorrect) {
-            stateClasses = "border-red-300 bg-red-50";
-          } else if (isSelected) {
-            stateClasses = "border-primary bg-primary-light";
+            stateClasses = "bg-gray-300 text-gray-500";
+          } else if (revealed) {
+            stateClasses = "bg-gray-200 text-gray-400";
           }
 
           return (
@@ -102,11 +102,11 @@ export default function QuizView({ node, hearts, onAnswer, onComplete, onExit }:
               key={option}
               onClick={() => handleSelect(index)}
               disabled={revealed}
-              className={`flex w-full items-center justify-between rounded-pill border-2 px-5 py-3 text-left text-sm font-medium text-gray-800 transition-all duration-200 ease-out ${stateClasses}`}
+              className={`flex w-full items-center justify-between rounded-pill px-5 py-3 text-left text-sm font-semibold transition-all duration-200 ease-out ${stateClasses}`}
             >
               {option}
-              {revealed && isCorrect && <CheckCircle2 className="h-5 w-5 text-success" />}
-              {revealed && isSelected && !isCorrect && <XCircle className="h-5 w-5 text-red-400" />}
+              {revealed && isCorrect && <CheckCircle2 className="h-5 w-5" />}
+              {revealed && isSelected && !isCorrect && <XCircle className="h-5 w-5" />}
             </button>
           );
         })}
