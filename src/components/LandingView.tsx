@@ -49,8 +49,13 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
         </button>
       </header>
 
-      <section className="rounded-b-[64px] bg-gradient-to-b from-gradient-start to-gradient-end px-6 pb-20 pt-10 text-center">
-        <h1 style={displayFont} className="mx-auto max-w-xs text-4xl font-semibold leading-tight text-gray-900">
+      <section className="relative overflow-hidden rounded-b-[64px] bg-gradient-to-b from-gradient-start to-gradient-end px-6 pb-20 pt-10 text-center">
+        <span className="absolute -right-2 top-14 h-16 w-6 rotate-12 rounded-full bg-accent-coral" />
+        <span className="absolute left-4 bottom-24 h-3 w-3 rounded-full bg-accent-gold" />
+        <h1
+          style={displayFont}
+          className="relative mx-auto max-w-xs text-5xl font-extrabold leading-[1.05] text-gray-900"
+        >
           Learn it until you can teach it
         </h1>
         <p className="mx-auto mt-4 max-w-xs text-sm text-gray-700">
@@ -106,27 +111,52 @@ export default function LandingView({ onGetStarted }: LandingViewProps) {
         </p>
       </section>
 
-      <section className="px-6 py-16 text-center">
-        <h2 style={displayFont} className="text-xl font-semibold text-gray-900">
+      <section className="relative overflow-hidden rounded-b-[48px] bg-primary px-6 py-16 text-center">
+        <h2 style={displayFont} className="text-2xl font-semibold text-white">
           Ready to actually understand it?
         </h2>
-        <p className="mt-2 text-sm text-gray-600">Pick anything you&apos;re studying and put it to the test.</p>
+        <p className="mt-2 text-sm text-white/70">
+          Pick anything you&apos;re studying and put it to the test.
+        </p>
         <button
           onClick={onGetStarted}
-          className="mt-6 rounded-pill bg-primary px-8 py-3 font-medium text-white shadow-sm"
+          className="mt-6 rounded-pill bg-white px-8 py-3 font-medium text-primary shadow-sm"
         >
           Get started
         </button>
       </section>
 
-      <footer className="border-t border-gray-100 px-6 py-8 text-center text-xs text-gray-500">
-        <p>Teachloop &middot; a student hackathon project</p>
-        <p className="mt-2">
-          <a href="/terms" className="underline">Terms</a> &middot;{" "}
-          <a href="/privacy" className="underline">Privacy</a> &middot;{" "}
+      <footer className="relative overflow-hidden rounded-t-[48px] bg-surface px-6 pb-4 pt-12">
+        <div className="grid grid-cols-3 gap-3 text-left">
+          <div>
+            <p style={displayFont} className="font-semibold text-gray-900">Teachloop</p>
+            <p className="mt-2 text-xs text-gray-500">Learn it until you can teach it.</p>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-gray-900">Product</p>
+            <p className="mt-2 text-xs text-gray-500">Home</p>
+            <p className="mt-1 text-xs text-gray-500">Lesson history</p>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-gray-900">Legal</p>
+            <a href="/terms" className="mt-2 block text-xs text-gray-500 underline">Terms</a>
+            <a href="/privacy" className="mt-1 block text-xs text-gray-500 underline">Privacy</a>
+          </div>
+        </div>
+
+        <div className="mt-8 flex items-center justify-between border-t border-gray-100 pt-4 text-xs text-gray-400">
+          <span>&copy; 2026 Teachloop</span>
           <a href="mailto:web3update3y@gmail.com" className="underline">
             web3update3y@gmail.com
           </a>
+        </div>
+
+        <p
+          aria-hidden
+          style={displayFont}
+          className="pointer-events-none -mb-6 mt-6 select-none overflow-hidden text-center text-[5rem] font-extrabold leading-none text-gray-100"
+        >
+          Teachloop
         </p>
       </footer>
     </main>
